@@ -6,6 +6,7 @@
 #include "Components/StaticMeshComponent.h"
 #include "Product.h"
 #include "Engine/Engine.h"
+#include "MovingOutCharacter.h"
 
 // Sets default values
 ATruckTriggerBox::ATruckTriggerBox()
@@ -18,8 +19,8 @@ ATruckTriggerBox::ATruckTriggerBox()
 	RootComponent = boxComp;
 	boxComp->SetBoxExtent(FVector(100));
 
-	BodyMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BodyMesh"));
-	BodyMesh->SetupAttachment(RootComponent);
+	//BodyMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BodyMesh"));
+	//BodyMesh->SetupAttachment(RootComponent);
 
 }
 
@@ -43,8 +44,7 @@ void ATruckTriggerBox::Tick(float DeltaTime)
 
 void ATruckTriggerBox::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Blue, FString::Printf(TEXT("Actor Here~")));
-	
+
 	//trucktiggerbox에 prop이 들어왔는지 확인
 	AProduct* prop = Cast<AProduct>(OtherActor);
 
