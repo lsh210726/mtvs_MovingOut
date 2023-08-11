@@ -23,7 +23,18 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY(EditAnywhere, Category="Truck")
+	UPROPERTY(VisibleAnywhere, Category="Truck")
 	class UBoxComponent* boxComp;
+
+	UPROPERTY(VisibleAnywhere, Category = "Truck")
+	class UStaticMeshComponent* BodyMesh;
+
+	//유효한 가구 넣은 횟수
+	UPROPERTY(EditAnywhere)
+	int32 count;
+
+	void OnComponentBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
+	
 
 };
