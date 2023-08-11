@@ -66,7 +66,7 @@ void UPlayer_Move::Move(const FInputActionValue& value)
 	me->AddMovementInput(RightDirection, MovementVector.X); //ÁÂ¿ì ¿òÁ÷ÀÓ
 
 	FVector dir = player->GetActorLocation();
-	cameraActor->SetActorLocation(FVector(dir.X-1300, dir.Y+900,  670));
+	cameraActor->SetActorLocation(FVector(dir.X+600, dir.Y+1300,  670));
 }
 
 

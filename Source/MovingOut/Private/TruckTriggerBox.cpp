@@ -37,6 +37,7 @@ void ATruckTriggerBox::BeginPlay()
 void ATruckTriggerBox::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	//브랜치 추가
 
 }
 
