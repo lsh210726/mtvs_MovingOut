@@ -64,6 +64,9 @@ public:
 	UInputAction* MovementAction;
 	UPROPERTY(EditAnywhere, Category = Input)
 	UInputAction* JumpAction;
+	//1,2인용 리빙UI스위치 
+	UPROPERTY(EditAnywhere, Category = Input)
+	UInputAction* SwitchUIAction;
 
 public:
 	// delegate
@@ -71,6 +74,11 @@ public:
 
 
 	void Move(const FInputActionValue& value);
+
+//1,2용인지 숫자 UI표시 
+public:
+	UFUNCTION()
+	void OnToggleUI();
 
 public:
 	//widget 을 디테일에서 사용하기 위함
