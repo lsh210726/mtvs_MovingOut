@@ -8,6 +8,8 @@
 #include <Camera/CameraComponent.h>
 #include "PlayerBaseComponent.h"
 #include "Player_Move.h"
+#include "PropOne_UI.h"
+#include "PropTwo_UI.h"
 
 // Sets default values
 AMovingOutCharacter::AMovingOutCharacter()
@@ -92,4 +94,21 @@ void AMovingOutCharacter::Move(const FInputActionValue& value)
 //}
 
 
+void AMovingOutCharacter::OnToggleUI()
+{
+ //if (!IsValid(livingSwitchUI_OneInstance))
+  //  {
+  //      // UI 위젯을 생성하고 뷰포트에 추가합니다.
+  //      livingSwitchUI_One = CreateWidget<livingSwitchUI_One>(this, livingSwitchUI_One::StaticClass());
+  //      if (livingSwitchUI_One)
+  //      {
+  //          UIWidgetInstance->AddToViewport();
+  //      }
+  //  }
+  //  else
+  //  {
+  //      // UI 위젯을 뷰포트에서 제거합니다.
+  //      livingSwitchUI_One->RemoveFromParent();
+  //      livingSwitchUI_OneInstance = nullptr;
+}
 

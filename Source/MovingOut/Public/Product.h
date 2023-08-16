@@ -33,6 +33,10 @@ public:
 	UPROPERTY(EditAnywhere, Category="Prop")
 	bool bValidProp = false;
 
-	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly,Category="Prop")
+	bool PropUI_1 = true; 
+		
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Prop")
+	bool PropUI_2 = true;
 
 };
