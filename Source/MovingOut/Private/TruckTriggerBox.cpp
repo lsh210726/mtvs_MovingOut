@@ -52,12 +52,12 @@ void ATruckTriggerBox::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedCo
 	if (prop)
 	{	
 		//prop이 가지고있는 bValidProp 이 true이면
-		if (prop->bValidProp) {
+		if (prop->bValidProp && count < 3) {
 			//유효횟수 추가
 			count++;
-			GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Yellow, FString::Printf(TEXT("ValidProp : %d"), count));
+			//GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Yellow, FString::Printf(TEXT("ValidProp : %d"), count));
 		}
-		GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Red, FString::Printf(TEXT("It's Prop")));
+		//GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Red, FString::Printf(TEXT("It's Prop")));
 	}
 
 	
