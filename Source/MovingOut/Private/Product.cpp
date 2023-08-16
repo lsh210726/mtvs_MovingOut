@@ -11,13 +11,13 @@ AProduct::AProduct()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	BoxComp = CreateDefaultSubobject<UBoxComponent>(TEXT("BoxComp"));
+	/*BoxComp = CreateDefaultSubobject<UBoxComponent>(TEXT("BoxComp"));
 	RootComponent = BoxComp;
-	BoxComp->SetBoxExtent(FVector(10));
+	BoxComp->SetBoxExtent(FVector(10));*/
 
 	BodyMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BodyMesh"));
-	BodyMesh->SetupAttachment(RootComponent);
-
+	//BodyMesh->SetupAttachment(RootComponent);
+	RootComponent=BodyMesh;
 
 }
 

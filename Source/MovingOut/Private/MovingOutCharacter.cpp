@@ -35,6 +35,8 @@ void AMovingOutCharacter::BeginPlay()
 			Subsystem->AddMappingContext(MovingOutContext, 0);
 		}
 	}
+
+
 }
 
 // Called every frame
@@ -81,6 +83,8 @@ void AMovingOutCharacter::Move(const FInputActionValue& value)
 	//const FVector rightdirection = FRotationMatrix(GetController()->GetControlRotation()).GetUnitAxis(EAxis::Y); //오른쪽방향
 	//AddMovementInput(rightdirection, movementvector.X); //좌우 움직임
 }
+
+
 
 //void AMovingOutCharacter::Jump()
 //{

@@ -50,4 +50,12 @@ class AOnePersonCamera* cameraActor;
 UPROPERTY(EditAnywhere)
 class AMovingOutCharacter* player;
 
+UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="SettingCamera")
+float directionX = 600;
+
+UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="SettingCamera")
+float directionY = 1300;
+
+
+
 };
