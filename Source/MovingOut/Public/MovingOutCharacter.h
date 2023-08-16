@@ -72,6 +72,14 @@ public:
 
 	void Move(const FInputActionValue& value);
 
+public:
+	//widget 을 디테일에서 사용하기 위함
+	UPROPERTY(VisibleAnywhere, Category = Widget, meta = (AllowPrivateAccess = "true"))
+	class UWidgetComponent* Countwidget; 
+
+	UPROPERTY(EditAnywhere, Category = MySettings)
+	TSubclassOf<class UBoxCountWidget> battleWidget;
+
 	
 
 };

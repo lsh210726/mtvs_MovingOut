@@ -6,6 +6,7 @@
 #include "Components/StaticMeshComponent.h"
 #include "Product.h"
 #include "Engine/Engine.h"
+#include "MovingOutCharacter.h"
 
 // Sets default values
 ATruckTriggerBox::ATruckTriggerBox()
@@ -18,8 +19,8 @@ ATruckTriggerBox::ATruckTriggerBox()
 	RootComponent = boxComp;
 	boxComp->SetBoxExtent(FVector(100));
 
-	BodyMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BodyMesh"));
-	BodyMesh->SetupAttachment(RootComponent);
+	//BodyMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BodyMesh"));
+	//BodyMesh->SetupAttachment(RootComponent);
 
 }
 
@@ -37,13 +38,13 @@ void ATruckTriggerBox::BeginPlay()
 void ATruckTriggerBox::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	//브랜치 추가
 
 }
 
 void ATruckTriggerBox::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Blue, FString::Printf(TEXT("Actor Here~")));
-	
+
 	//trucktiggerbox에 prop이 들어왔는지 확인
 	AProduct* prop = Cast<AProduct>(OtherActor);
 
@@ -51,12 +52,12 @@ void ATruckTriggerBox::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedCo
 	if (prop)
 	{	
 		//prop이 가지고있는 bValidProp 이 true이면
-		if (prop->bValidProp) {
+		if (prop->bValidProp && count < 3) {
 			//유효횟수 추가
 			count++;
-			GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Yellow, FString::Printf(TEXT("ValidProp : %d"), count));
+			//GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Yellow, FString::Printf(TEXT("ValidProp : %d"), count));
 		}
-		GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Red, FString::Printf(TEXT("It's Prop")));
+		//GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Red, FString::Printf(TEXT("It's Prop")));
 	}
 
 	
