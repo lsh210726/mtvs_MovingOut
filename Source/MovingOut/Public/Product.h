@@ -29,14 +29,16 @@ public:
 	UPROPERTY(VisibleAnywhere, Category = "Prop")
 	class UStaticMeshComponent* BodyMesh;
 
+	//위젯컴포턴트 선언
+	UPROPERTY(VisibleAnywhere,Category="prop")
+	class UWidgetComponent* WidGetComp;
+
 	//트럭에 넣는 유효한 박스인지 확인하기
 	UPROPERTY(EditAnywhere, Category="Prop")
 	bool bValidProp = false;
 
+	//true1 false2 로 진행
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly,Category="Prop")
 	bool PropUI_1 = true; 
-		
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Prop")
-	bool PropUI_2 = true;
 
 };

@@ -4,6 +4,7 @@
 #include "Product.h"
 #include "Components/BoxComponent.h"
 #include "Components/StaticMeshComponent.h"
+#include <UMG/Public/Components/WidgetComponent.h>
 
 // Sets default values
 AProduct::AProduct()
@@ -19,13 +20,20 @@ AProduct::AProduct()
 	//BodyMesh->SetupAttachment(RootComponent);
 	RootComponent=BodyMesh;
 
+	//위젯컴포넌트 만들어주기
+	WidGetComp= CreateDefaultSubobject<UWidgetComponent>(TEXT("WidGetComp"));
+	//루트로 위젯컴프 
+	WidGetComp->SetupAttachment(RootComponent);
+	WidGetComp->SetRelativeLocation(FVector(1,1,1));
+	WidGetComp->SetRelativeScale3D(FVector(1,1,1));
+
 }
 
 // Called when the game starts or when spawned
 void AProduct::BeginPlay()
 {
 	Super::BeginPlay();
-
+	WidGetComp->SetVisibility(false);
 	
 	
 }
