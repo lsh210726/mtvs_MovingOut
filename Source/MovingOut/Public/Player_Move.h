@@ -25,7 +25,15 @@ public:
 //FInputActionValue 매개변수를 받아들여 참조전달
 //좌우이동
 void Move(const FInputActionValue& value);
+
+//UFUNCTION(Server, Unreliable)
+//void ServerMove(const FInputActionValue& value);
+////
+//UFUNCTION(NetMulticast, Unreliable)
+//void MultiCastMove(const FInputActionValue& value);
+
 //Jump 가상함수 선언
+UFUNCTION()
 void Jump() /*override*/;
 
 private:

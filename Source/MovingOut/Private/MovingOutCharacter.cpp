@@ -10,6 +10,9 @@
 #include "Player_Move.h"
 #include "PropOne_UI.h"
 #include "PropTwo_UI.h"
+#include "Kismet/GameplayStatics.h"
+#include "MovingOutPlayerController.h"
+#include "OnePersonCamera.h"
 
 // Sets default values
 AMovingOutCharacter::AMovingOutCharacter()
@@ -24,21 +27,37 @@ AMovingOutCharacter::AMovingOutCharacter()
 	//playerComp = CreateDefaultSubobject<UPlayerBaseComponent>(TEXT("Base Component"));
 	playerMove = CreateDefaultSubobject<UPlayer_Move>(TEXT("PlayerMove"));
 }
-
+ 
 // Called when the game starts or when spawned
 void AMovingOutCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	//방어코드
+
+	
 	if (APlayerController* PlayerController = Cast<APlayerController>(GetController()))
 	{
 		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer())) 
 		{
 			Subsystem->AddMappingContext(MovingOutContext, 0);
 		}
+	
 	}
 
 
+	FTimerHandle changCamera;
+	GetWorldTimerManager().SetTimer(changCamera, this, &AMovingOutCharacter::ChangeCamera, 1.0f, false);
+
+	/*if (GetController() != nullptr && GetController()->IsLocalPlayerController()) {
+		pc = Cast<AMovingOutPlayerController>(GetController());
+		pc->Possess(this);
+	}*/
+
+	if (HasAuthority())
+	{
+		
+	}
+	
 }
 
 // Called every frame
@@ -110,5 +129,15 @@ void AMovingOutCharacter::OnToggleUI()
   //      // UI 위젯을 뷰포트에서 제거합니다.
   //      livingSwitchUI_One->RemoveFromParent();
   //      livingSwitchUI_OneInstance = nullptr;
+}
+
+void AMovingOutCharacter::ChangeCamera()
+{
+	if (GetController() != nullptr && GetController()->IsLocalPlayerController()) {
+
+		movingoutCamera = Cast<AOnePersonCamera>(UGameplayStatics::GetActorOfClass(this, AOnePersonCamera::StaticClass()));
+		pc = Cast<AMovingOutPlayerController>(GetController());
+		pc->SetViewTarget(movingoutCamera);
+	}
 }
 

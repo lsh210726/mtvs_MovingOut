@@ -21,6 +21,7 @@ void UPlayer_Move::BeginPlay()
 	player = Cast<AMovingOutCharacter>(UGameplayStatics::GetActorOfClass(GetWorld(), AMovingOutCharacter::StaticClass()));
 	//UCharacterMovementComponent* CharacterMovement = GetCharacterMovement();
 	
+	//bReplicates = true;
 }
 
 void UPlayer_Move::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
@@ -69,6 +70,16 @@ void UPlayer_Move::Move(const FInputActionValue& value)
 	cameraActor->SetActorLocation(FVector(dir.X+directionX, dir.Y+directionY,  670));
 }
 
+
+//void UPlayer_Move::ServerMove_Implementation(const FInputActionValue& value)
+//{
+//	MultiCastMove(value);
+//}
+//
+//void UPlayer_Move::MultiCastMove_Implementation(const FInputActionValue& value)
+//{
+//
+//}
 
 void UPlayer_Move::Jump()
 {

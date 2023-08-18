@@ -38,7 +38,7 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-
+	
 
 private:
 	
@@ -88,6 +88,10 @@ public:
 	UPROPERTY(EditAnywhere, Category = MySettings)
 	TSubclassOf<class UBoxCountWidget> battleWidget;
 
-	
+	class AMovingOutPlayerController* pc;
 
+	
+	class AOnePersonCamera* movingoutCamera;
+
+	void ChangeCamera();
 };
