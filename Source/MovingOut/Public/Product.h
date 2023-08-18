@@ -41,4 +41,14 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly,Category="Prop")
 	bool PropUI_1 = true; 
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	FVector prevVelocity;
+
+	UPROPERTY(EditAnywhere, Category=prop)
+	class USoundBase* productSound;
+
+	bool bDoOnce=true; //두온스
+	//타이머
+	FTimerHandle GravityTimerHandle;
+	float GravityTime=0.5f;
 };
