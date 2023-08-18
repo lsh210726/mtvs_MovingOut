@@ -21,6 +21,7 @@ void UPlayer_Move::BeginPlay()
 	player = Cast<AMovingOutCharacter>(UGameplayStatics::GetActorOfClass(GetWorld(), AMovingOutCharacter::StaticClass()));
 	//UCharacterMovementComponent* CharacterMovement = GetCharacterMovement();
 	
+	//bReplicates = true;
 }
 
 void UPlayer_Move::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
@@ -65,10 +66,20 @@ void UPlayer_Move::Move(const FInputActionValue& value)
 	me->AddMovementInput(ForwardDirection, MovementVector.Y); //전후방 움직임
 	me->AddMovementInput(RightDirection, MovementVector.X); //좌우 움직임
 
-	FVector dir = player->GetActorLocation();
-	cameraActor->SetActorLocation(FVector(dir.X+directionX, dir.Y+directionY,  670));
+	/*FVector dir = player->GetActorLocation();
+	cameraActor->SetActorLocation(FVector(dir.X+directionX, dir.Y+directionY,  670));*/
 }
 
+
+//void UPlayer_Move::ServerMove_Implementation(const FInputActionValue& value)
+//{
+//	MultiCastMove(value);
+//}
+//
+//void UPlayer_Move::MultiCastMove_Implementation(const FInputActionValue& value)
+//{
+//
+//}
 
 void UPlayer_Move::Jump()
 {
