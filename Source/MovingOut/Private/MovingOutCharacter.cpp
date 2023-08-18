@@ -7,9 +7,14 @@
 #include "GameFramework/SpringArmComponent.h"
 #include <Camera/CameraComponent.h>
 #include "PlayerBaseComponent.h"
+#include "Product.h"
 #include "Player_Move.h"
+#include <kismet/GameplayStatics.h>
+#include <UMG/Public/Blueprint/UserWidget.h>
 #include "PropOne_UI.h"
 #include "PropTwo_UI.h"
+#include <UMG/Public/Components/WidgetComponent.h>
+#include <EngineUtils.h>
 
 // Sets default values
 AMovingOutCharacter::AMovingOutCharacter()
@@ -38,7 +43,7 @@ void AMovingOutCharacter::BeginPlay()
 		}
 	}
 
-
+	//prop->SetVisibility(ESlateVisibility::Hidden);
 }
 
 // Called every frame
@@ -46,6 +51,7 @@ void AMovingOutCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	GrabObjectContinue();
 }
 
 // Called to bind functionality to input
@@ -71,6 +77,23 @@ void AMovingOutCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInput
 	//{		
 	//EnhancedInputComponent->BindAction(MovementAction, ETriggerEvent::Triggered, this, &AMovingOutCharacter::Move);
 	//EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Triggered, this, &AMovingOutCharacter::Jump);
+
+	 //1,2용인지 숫자 UI표시 인풋값
+	auto pInput = Cast<UEnhancedInputComponent>(PlayerInputComponent);
+
+	//바인드
+	//playerComp->SetupInputBinding(PlayerInputComponent);
+	//PlayerInputComponent를 UEnhancedInputComponent 타입으로 형변환
+	if (pInput)
+	{		
+		 pInput->BindAction(SwitchUIAction,ETriggerEvent::Started, this, &AMovingOutCharacter::OnToggleUI);
+		 pInput->BindAction(SwitchUIAction,ETriggerEvent::Completed, this, &AMovingOutCharacter::OffToggleUI);	  
+	}
+
+	//이승형 코드
+   PlayerInputComponent->BindAction(TEXT("GrabObject"), IE_Pressed, this, &AMovingOutCharacter::GrabObjectStart);
+   PlayerInputComponent->BindAction(TEXT("GrabObject"), IE_Released, this, &AMovingOutCharacter::GrabObjectEnd);
+   PlayerInputComponent->BindAction(TEXT("ShootObject"), IE_Pressed, this, &AMovingOutCharacter::ShootObject);
 }
 
 
@@ -96,19 +119,68 @@ void AMovingOutCharacter::Move(const FInputActionValue& value)
 
 void AMovingOutCharacter::OnToggleUI()
 {
- //if (!IsValid(livingSwitchUI_OneInstance))
-  //  {
-  //      // UI 위젯을 생성하고 뷰포트에 추가합니다.
-  //      livingSwitchUI_One = CreateWidget<livingSwitchUI_One>(this, livingSwitchUI_One::StaticClass());
-  //      if (livingSwitchUI_One)
-  //      {
-  //          UIWidgetInstance->AddToViewport();
-  //      }
-  //  }
-  //  else
-  //  {
-  //      // UI 위젯을 뷰포트에서 제거합니다.
-  //      livingSwitchUI_One->RemoveFromParent();
-  //      livingSwitchUI_OneInstance = nullptr;
+	//UE_LOG(LogTemp,Warning,TEXT("dddddddd"));
+
+	//월드에 있는 Product 부모클래스를 가진 Actor들을 모두 찾는다
+	//배열로 가져오기
+	/**/TArray<AActor*> arrOutActors;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AProduct::StaticClass(), arrOutActors);
+	//배열에 담은 변수를 AProduct 캐스트
+	for (AActor* actor : arrOutActors) //어레이에서 하나하나 불러서 뭔가 해주겠다
+	{
+		AProduct* prop = Cast<AProduct>(actor); //AProduct 캐스트
+
+		if(prop != nullptr)
+		{//캐스트가 true면
+			prop->WidGetComp->SetVisibility(true);
+		}
+	}
+	/*for (TActorIterator<AProduct> It(GetWorld()); It; ++It)
+	{
+		AProduct* spawn = *It;
+		spawn->WidGetComp->SetVisibility(true);
+	}*/
+}
+void AMovingOutCharacter::OffToggleUI()
+{
+	//월드에 있는 Product 부모클래스를 가진 Actor들을 모두 찾는다
+	//배열로 가져오기
+	/**/TArray<AActor*> arrOutActors;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AProduct::StaticClass(), arrOutActors);
+	//배열에 담은 변수를 AProduct 캐스트
+	for (AActor* actor : arrOutActors)
+	{
+		AProduct* prop = Cast<AProduct>(actor);
+		if(prop != nullptr)
+		{//캐스트가 true면
+			prop->WidGetComp->SetVisibility(false);
+		}
+	}
+	
+//    else
+//    {
+//        // UI 위젯을 뷰포트에서 제거합니다.
+//        livingSwitchUI_One->RemoveFromParent();
+//        livingSwitchUI_OneInstance = nullptr;
+}
+
+void AMovingOutCharacter::GrabObjectStart_Implementation()
+{
+
+}
+
+void AMovingOutCharacter::GrabObjectEnd_Implementation()
+{
+
+}
+
+void AMovingOutCharacter::GrabObjectContinue_Implementation()
+{
+
+}
+
+void AMovingOutCharacter::ShootObject_Implementation()
+{
+
 }
 

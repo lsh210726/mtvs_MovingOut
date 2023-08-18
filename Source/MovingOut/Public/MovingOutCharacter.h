@@ -79,15 +79,31 @@ public:
 public:
 	UFUNCTION()
 	void OnToggleUI();
-
+	UFUNCTION()
+	void OffToggleUI();
 public:
 	//widget 을 디테일에서 사용하기 위함
 	UPROPERTY(VisibleAnywhere, Category = Widget, meta = (AllowPrivateAccess = "true"))
 	class UWidgetComponent* Countwidget; 
 
+	UPROPERTY()
+	class UPropOne_UI* propSlot;
+
 	UPROPERTY(EditAnywhere, Category = MySettings)
 	TSubclassOf<class UBoxCountWidget> battleWidget;
 
+
+
+   //이승형 코드
+public:
+   UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+      void GrabObjectStart();
+   UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+      void GrabObjectEnd();
+   UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+      void GrabObjectContinue();
+   UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+      void ShootObject();
 	
 
 };
