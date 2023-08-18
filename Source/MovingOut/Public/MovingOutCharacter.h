@@ -105,5 +105,10 @@ public:
    UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
       void ShootObject();
 	
+   /*class AMovingOutPlayerController* pc;
 
+
+   class AOnePersonCamera* movingoutCamera;
+
+   void ChangeCamera();*/
 };

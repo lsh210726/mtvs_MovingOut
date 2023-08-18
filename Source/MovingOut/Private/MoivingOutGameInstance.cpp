@@ -72,7 +72,7 @@ void UMoivingOutGameInstance::OnCreateMySession(FName sessionName, bool bWasSucc
 	if (bWasSuccessful)
 	{
 		//세션이 만들어진 후 이동할 레벨 경로 지정
-		GetWorld()->ServerTravel("/Game/Map/KIM_Moving?Listen", true);
+		GetWorld()->ServerTravel("/Game/Map/MovingTest?Listen", true);
 	}
 }
 

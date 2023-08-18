@@ -66,8 +66,8 @@ void UPlayer_Move::Move(const FInputActionValue& value)
 	me->AddMovementInput(ForwardDirection, MovementVector.Y); //전후방 움직임
 	me->AddMovementInput(RightDirection, MovementVector.X); //좌우 움직임
 
-	FVector dir = player->GetActorLocation();
-	cameraActor->SetActorLocation(FVector(dir.X+directionX, dir.Y+directionY,  670));
+	/*FVector dir = player->GetActorLocation();
+	cameraActor->SetActorLocation(FVector(dir.X+directionX, dir.Y+directionY,  670));*/
 }
 
 

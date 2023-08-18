@@ -44,6 +44,20 @@ void AMovingOutCharacter::BeginPlay()
 	}
 
 	//prop->SetVisibility(ESlateVisibility::Hidden);
+
+
+	/*FTimerHandle changCamera;
+	GetWorldTimerManager().SetTimer(changCamera, this, &AMovingOutCharacter::ChangeCamera, 1.0f, false);
+
+	/*if (GetController() != nullptr && GetController()->IsLocalPlayerController()) {
+		pc = Cast<AMovingOutPlayerController>(GetController());
+		pc->Possess(this);
+	}
+
+	if (HasAuthority())
+	{
+
+	}*/
 }
 
 // Called every frame
@@ -184,3 +198,12 @@ void AMovingOutCharacter::ShootObject_Implementation()
 
 }
 
+/*void AMovingOutCharacter::ChangeCamera()
+{
+	if (GetController() != nullptr && GetController()->IsLocalPlayerController()) {
+
+		movingoutCamera = Cast<AOnePersonCamera>(UGameplayStatics::GetActorOfClass(this, AOnePersonCamera::StaticClass()));
+		pc = Cast<AMovingOutPlayerController>(GetController());
+		pc->SetViewTarget(movingoutCamera);
+	}
+}*/
