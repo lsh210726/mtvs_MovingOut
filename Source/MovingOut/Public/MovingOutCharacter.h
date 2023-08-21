@@ -64,6 +64,13 @@ public:
 	UInputAction* MovementAction;
 	UPROPERTY(EditAnywhere, Category = Input)
 	UInputAction* JumpAction;
+	//1,2인용 리빙UI스위치 
+	UPROPERTY(EditAnywhere, Category = Input)
+	UInputAction* SwitchUIAction;
+
+	//세션에 조인한 player수 체크
+	UPROPERTY(EditAnywhere, Category = Session)
+	int32 playersNum;
 
 public:
 	// delegate
@@ -72,14 +79,44 @@ public:
 
 	void Move(const FInputActionValue& value);
 
+//1,2용인지 숫자 UI표시 
+public:
+	UFUNCTION()
+	void OnToggleUI();
+	UFUNCTION()
+	void OffToggleUI();
 public:
 	//widget 을 디테일에서 사용하기 위함
 	UPROPERTY(VisibleAnywhere, Category = Widget, meta = (AllowPrivateAccess = "true"))
 	class UWidgetComponent* Countwidget; 
 
+	UPROPERTY()
+	class UPropOne_UI* propSlot;
+
 	UPROPERTY(EditAnywhere, Category = MySettings)
 	TSubclassOf<class UBoxCountWidget> battleWidget;
 
-	
+	UFUNCTION(Server, Reliable)
+	void ServerCountPlayer();
 
+	class AMovingOutGameModeBase* gm;
+
+
+   //이승형 코드
+public:
+   UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+      void GrabObjectStart();
+   UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+      void GrabObjectEnd();
+   UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+      void GrabObjectContinue();
+   UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+      void ShootObject();
+	
+   /*class AMovingOutPlayerController* pc;
+
+
+   class AOnePersonCamera* movingoutCamera;
+
+   void ChangeCamera();*/
 };

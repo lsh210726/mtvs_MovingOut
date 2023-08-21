@@ -3,6 +3,8 @@
 
 #include "MovingOutGameModeBase.h"
 #include "Blueprint/UserWidget.h"
+#include "MovingOutCharacter.h"
+#include "MovingOutPlayerController.h"
 
 
 AMovingOutGameModeBase::AMovingOutGameModeBase()
@@ -13,6 +15,33 @@ AMovingOutGameModeBase::AMovingOutGameModeBase()
 	// TSubclassOf 템플릿 클래스 객체에 블루프린트 클래스를 넣어준다
 	if (MainHUDWidgetAsset.Succeeded())
 		MainHUDWidgetClass = MainHUDWidgetAsset.Class;
+
+
+	DefaultPawnClass = AMovingOutCharacter::StaticClass();
+	PlayerControllerClass = AMovingOutPlayerController::StaticClass();
+
+}
+
+
+
+void AMovingOutGameModeBase::PostLogin(APlayerController* NewPlayer)
+{
+	Super::PostLogin(NewPlayer);
+}
+
+void AMovingOutGameModeBase::CountPlayer()
+{
+	playerNum++;
+	if (playerNum == 2)
+	{
+		bplayerMax = true;
+	}
+}
+
+void AMovingOutGameModeBase::EnterMainMap()
+{
+	UE_LOG(LogTemp, Warning, TEXT("EnterMainMap"));
+
 }
 
 void AMovingOutGameModeBase::BeginPlay()
@@ -31,4 +60,15 @@ void AMovingOutGameModeBase::BeginPlay()
 	}
 }
 
+
+void AMovingOutGameModeBase::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+	//UE_LOG(LogTemp, Warning, TEXT("playerNum : %d"), playerNum);
+
+	/*if ()
+	{
+	}*/
+	
+}
 

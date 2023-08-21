@@ -17,6 +17,8 @@ class MOVINGOUT_API AMovingOutGameModeBase : public AGameModeBase
 	 
 	virtual void BeginPlay() override;
 
+	virtual void Tick(float DeltaSeconds) override;
+	
 protected:
 
    TSubclassOf<UBoxCountWidget> MainHUDWidgetClass;
@@ -24,5 +26,17 @@ protected:
 
 public:
 	AMovingOutGameModeBase();
-	  
+	virtual void PostLogin(APlayerController* NewPlayer);
+
+	UFUNCTION()
+	void CountPlayer();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	int32 playerNum;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool bplayerMax = false;
+
+	UFUNCTION( BlueprintCallable)
+	void EnterMainMap();
 };
