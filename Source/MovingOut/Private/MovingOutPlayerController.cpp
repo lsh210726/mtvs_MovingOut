@@ -85,4 +85,5 @@ void AMovingOutPlayerController::GoToEnd_Implementation()
 	
 	GetWorld()->ServerTravel("/Game/Map/EndingMap?Listen", true);
 
+
 }

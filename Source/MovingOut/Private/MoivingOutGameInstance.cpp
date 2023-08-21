@@ -105,7 +105,6 @@ void UMoivingOutGameInstance::OnJoinMySession(FName sessionName, EOnJoinSessionC
 			
 			//FString url = "192.168.0.58";
 			FString url = "192.168.0.76";
-
 			//FString url = "192.168.0.58:7777";
 			//FString url = "125.132.216.155:7777";
 			//FString url = "192.168.0.217:7777";

@@ -45,7 +45,7 @@ void ATruckTriggerBox::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	//브랜치 추가
 
-	if (count == 10)
+	if (count == 8)
 	{	
 		//엔딩위젯 걸린 맵으로 이동
 		//GetWorld()->ServerTravel("/Game/Map/MovingTest?Listen", true);
@@ -63,9 +63,9 @@ void ATruckTriggerBox::ServerOnRep_CountUpdated()
 	if (count < 15) {
 	//	//유효횟수 추가
 		count++;
-	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Yellow, FString::Printf(TEXT("ValidProp : %d"), count));
+	//GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Yellow, FString::Printf(TEXT("ValidProp : %d"), count));
 	}
-	GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Red, FString::Printf(TEXT("It's Prop")));
+	//GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Red, FString::Printf(TEXT("It's Prop")));
 	//MultiOnRep_CountUpdated();
 }
 
