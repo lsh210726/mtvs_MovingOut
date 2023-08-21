@@ -34,4 +34,7 @@ private:
 
 	UFUNCTION(Server, Reliable, BlueprintCallable)
 	void OnEnterLevel();
+
+	UFUNCTION(Server, Reliable, BlueprintCallable)
+	void GoToEnd();
 };

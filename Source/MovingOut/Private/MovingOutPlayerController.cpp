@@ -79,3 +79,10 @@ void AMovingOutPlayerController::OnEnterLevel_Implementation()
 		gm->CountPlayer();
 	}
 }
+
+void AMovingOutPlayerController::GoToEnd_Implementation()
+{
+	
+	GetWorld()->ServerTravel("/Game/Map/EndingMap?Listen", true);
+
+}
