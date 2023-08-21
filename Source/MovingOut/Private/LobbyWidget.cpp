@@ -33,5 +33,6 @@ void ULobbyWidget::NativeTick(const FGeometry& MyGeometry, float InDeltaTime)
 void ULobbyWidget::OnClickInGame()
 {
 	//player->ServerCountPlayer();
+	//GetWorld()->ServerTravel("/Game/Map/MovingTest?Listen", true);
 	GetWorld()->ServerTravel("/Game/Map/MovingTest?Listen", true);
 }
