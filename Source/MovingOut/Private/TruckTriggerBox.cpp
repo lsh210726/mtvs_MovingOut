@@ -40,6 +40,12 @@ void ATruckTriggerBox::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	//브랜치 추가
 
+	if (count == 14)
+	{	
+		//엔딩위젯 걸린 맵으로 이동
+		//GetWorld()->ServerTravel("/Game/Map/MovingTest?Listen", true);
+	}
+
 }
 
 void ATruckTriggerBox::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
@@ -52,7 +58,7 @@ void ATruckTriggerBox::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedCo
 	if (prop)
 	{	
 		//prop이 가지고있는 bValidProp 이 true이면
-		if (prop->bValidProp && count < 3) {
+		if (prop->bValidProp && count < 15) {
 			//유효횟수 추가
 			count++;
 			//GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Yellow, FString::Printf(TEXT("ValidProp : %d"), count));

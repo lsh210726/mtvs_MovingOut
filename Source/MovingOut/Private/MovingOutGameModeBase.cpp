@@ -19,6 +19,7 @@ AMovingOutGameModeBase::AMovingOutGameModeBase()
 
 	DefaultPawnClass = AMovingOutCharacter::StaticClass();
 	PlayerControllerClass = AMovingOutPlayerController::StaticClass();
+
 }
 
 
@@ -26,6 +27,21 @@ AMovingOutGameModeBase::AMovingOutGameModeBase()
 void AMovingOutGameModeBase::PostLogin(APlayerController* NewPlayer)
 {
 	Super::PostLogin(NewPlayer);
+}
+
+void AMovingOutGameModeBase::CountPlayer()
+{
+	playerNum++;
+	if (playerNum == 2)
+	{
+		bplayerMax = true;
+	}
+}
+
+void AMovingOutGameModeBase::EnterMainMap()
+{
+	UE_LOG(LogTemp, Warning, TEXT("EnterMainMap"));
+
 }
 
 void AMovingOutGameModeBase::BeginPlay()
@@ -45,4 +61,14 @@ void AMovingOutGameModeBase::BeginPlay()
 }
 
 
+void AMovingOutGameModeBase::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+	//UE_LOG(LogTemp, Warning, TEXT("playerNum : %d"), playerNum);
+
+	/*if ()
+	{
+	}*/
+	
+}
 
