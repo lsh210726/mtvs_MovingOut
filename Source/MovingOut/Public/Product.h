@@ -38,7 +38,7 @@ public:
 	bool bValidProp = false;
 
 	//true1 false2 ทฮ ม๘วเ
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly,Category="Prop")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite,Category="Prop")
 	bool PropUI_1 = true; 
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)

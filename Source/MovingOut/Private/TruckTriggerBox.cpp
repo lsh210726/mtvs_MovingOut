@@ -45,10 +45,11 @@ void ATruckTriggerBox::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	//브랜치 추가
 
-	if (count == 14)
+	if (count == 10)
 	{	
 		//엔딩위젯 걸린 맵으로 이동
 		//GetWorld()->ServerTravel("/Game/Map/MovingTest?Listen", true);
+		GetWorld()->ServerTravel("/Game/Map/EndingMap?Listen", true);
 	}
 
 	
