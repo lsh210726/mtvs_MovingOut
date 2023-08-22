@@ -51,8 +51,6 @@ void ATruckTriggerBox::Tick(float DeltaTime)
 		//GetWorld()->ServerTravel("/Game/Map/MovingTest?Listen", true);
 		GetWorld()->ServerTravel("/Game/Map/EndingMap?Listen", true);
 	}
-
-	
 }
 
 
