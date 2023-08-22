@@ -72,7 +72,8 @@ void UMoivingOutGameInstance::OnCreateMySession(FName sessionName, bool bWasSucc
 	if (bWasSuccessful)
 	{
 		//세션이 만들어진 후 이동할 레벨 경로 지정
-		GetWorld()->ServerTravel("/Game/Map/MovingTest?Listen", true);
+		//GetWorld()->ServerTravel("/Game/Map/KIM_Moving?Listen", true);
+		GetWorld()->ServerTravel("/Game/Map/KIM_Moving?Listen", true);
 	}
 }
 
@@ -101,7 +102,12 @@ void UMoivingOutGameInstance::OnJoinMySession(FName sessionName, EOnJoinSessionC
 		if (playerCon != nullptr)
 		{
 			//join된 세션 호스트의 serverTravel 된 맵주소를 받아온다.
-			FString url = "192.168.0.58:7777";
+			
+			//FString url = "192.168.0.58";
+			FString url = "192.168.0.219";
+			//FString url = "192.168.0.58:7777";
+			//FString url = "125.132.216.155:7777";
+			//FString url = "192.168.0.217:7777";
 			//session네임을 받으면 session 주소를 찾음
 			sessionInterface->GetResolvedConnectString(sessionName, url);
 			UE_LOG(LogTemp, Warning, TEXT("Connection URL : %s"), *url);

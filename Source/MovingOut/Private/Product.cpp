@@ -1,5 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+
 #include "Product.h"
 #include "Components/BoxComponent.h"
 #include "Components/StaticMeshComponent.h"
@@ -10,7 +11,7 @@
 // Sets default values
 AProduct::AProduct()
 {
-	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+ 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 	/*BoxComp = CreateDefaultSubobject<UBoxComponent>(TEXT("BoxComp"));
@@ -19,17 +20,15 @@ AProduct::AProduct()
 
 	BodyMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BodyMesh"));
 	//BodyMesh->SetupAttachment(RootComponent);
-	RootComponent = BodyMesh;
+	RootComponent=BodyMesh;
 
 	//위젯컴포넌트 만들어주기
-	WidGetComp = CreateDefaultSubobject<UWidgetComponent>(TEXT("WidGetComp"));
-	//루트로 위젯컴프
+	WidGetComp= CreateDefaultSubobject<UWidgetComponent>(TEXT("WidGetComp"));
+	//루트로 위젯컴프 
 	WidGetComp->SetupAttachment(RootComponent);
-	WidGetComp->SetRelativeLocation(FVector(1, 1, 1));
-	WidGetComp->SetRelativeScale3D(FVector(1, 1, 1));
+	WidGetComp->SetRelativeLocation(FVector(1,1,1));
+	WidGetComp->SetRelativeScale3D(FVector(1,1,1));
 
-	BodyMesh->SetNotifyRigidBodyCollision(true);
-	BodyMesh->OnComponentHit.AddDynamic(this, &AProduct::OnHit);
 }
 
 // Called when the game starts or when spawned
@@ -37,6 +36,8 @@ void AProduct::BeginPlay()
 {
 	Super::BeginPlay();
 	WidGetComp->SetVisibility(false);
+	
+	
 }
 
 // Called every frame
@@ -47,26 +48,26 @@ void AProduct::Tick(float DeltaTime)
 	//무거운 물체 끄는 소리
 	FVector nowVelocity = BodyMesh->GetComponentVelocity();
 	FVector v = nowVelocity - prevVelocity;
-	if (BodyMesh->GetMass()>50)
+	if (BodyMesh->GetMass() > 50)
 	{
 
 		if (v.Size() > 30.0f)
 		{
 			//GEngine->AddOnScreenDebugMessage(-1, 1.0, FColor::Yellow, FString::Printf(TEXT("Velo %f"), v.Size()));
-			if (bDoOnce&& AttenuationSettings!=nullptr)
+			if (bDoOnce && AttenuationSettings != nullptr)
 			{
 				bDoOnce = false;
-				UGameplayStatics::PlaySoundAtLocation(GetWorld(), productSound, BodyMesh->GetComponentLocation(),1.0f,1.0f,0.0f, AttenuationSettings);
+				UGameplayStatics::PlaySoundAtLocation(GetWorld(), productSound, BodyMesh->GetComponentLocation(), 1.0f, 1.0f, 0.0f, AttenuationSettings);
 				GetWorld()->GetTimerManager().SetTimer(GravityTimerHandle, FTimerDelegate::CreateLambda([&]()
-				{
-					bDoOnce = true;
-					// TimerHandle 초기화
-					GetWorld()->GetTimerManager().ClearTimer(GravityTimerHandle);
-				}), GravityTime, false);
+					{
+						bDoOnce = true;
+						// TimerHandle 초기화
+						GetWorld()->GetTimerManager().ClearTimer(GravityTimerHandle);
+					}), GravityTime, false);
 			}
 		}
 	}
-	
+
 	prevVelocity = nowVelocity;
 }
 

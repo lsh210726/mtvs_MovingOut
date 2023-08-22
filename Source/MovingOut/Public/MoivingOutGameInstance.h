@@ -42,5 +42,7 @@ public:
 
 	//조인이 성공적으로 되었다면 처리할 함수
 	void OnJoinMySession(FName sessionName, EOnJoinSessionCompleteResult::Type result);
+
+	bool isEnterMainMap=false;
 	
 };

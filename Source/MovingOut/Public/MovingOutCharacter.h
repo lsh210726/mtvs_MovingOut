@@ -68,6 +68,10 @@ public:
 	UPROPERTY(EditAnywhere, Category = Input)
 	UInputAction* SwitchUIAction;
 
+	//세션에 조인한 player수 체크
+	UPROPERTY(EditAnywhere, Category = Session)
+	int32 playersNum;
+
 public:
 	// delegate
 	//FInputBindingDelegate onInputBindingDelegate;
@@ -92,6 +96,10 @@ public:
 	UPROPERTY(EditAnywhere, Category = MySettings)
 	TSubclassOf<class UBoxCountWidget> battleWidget;
 
+	UFUNCTION(Server, Reliable)
+	void ServerCountPlayer();
+
+	class AMovingOutGameModeBase* gm;
 
 
    //이승형 코드

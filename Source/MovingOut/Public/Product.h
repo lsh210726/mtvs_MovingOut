@@ -38,16 +38,16 @@ public:
 	bool bValidProp = false;
 
 	//true1 false2 로 진행
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly,Category="Prop")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite,Category="Prop")
 	bool PropUI_1 = true; 
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	FVector prevVelocity;
+   FVector prevVelocity;
 
-	UPROPERTY(EditAnywhere, Category=prop)
-	class USoundBase* productSound;
+   UPROPERTY(EditAnywhere, Category=prop)
+   class USoundBase* productSound;
 
-	bool bDoOnce=true; //두온스
+   	bool bDoOnce=true; //두온스
 	//타이머
 	FTimerHandle GravityTimerHandle;
 	float GravityTime=0.5f;
@@ -59,4 +59,5 @@ public:
 	//히트이벤트
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
+
 };
