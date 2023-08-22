@@ -167,8 +167,8 @@ void AMovingOutCharacter::OffToggleUI()
     for (AActor* actor : arrOutActors)
     {
         AProduct* prop = Cast<AProduct>(actor);
-        if (prop != nullptr)
-        {//캐스트가 true면
+        if (prop != nullptr)//만약 캐스트가 true면
+        {
             prop->WidGetComp->SetVisibility(false);
         }
     }

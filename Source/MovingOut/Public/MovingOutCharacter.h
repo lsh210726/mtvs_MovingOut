@@ -39,7 +39,6 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 
-
 private:
 	
 	//Move로 이동
@@ -79,7 +78,7 @@ public:
 
 	void Move(const FInputActionValue& value);
 
-//1,2용인지 숫자 UI표시 
+	//1,2용인지 숫자 UI표시 
 public:
 	UFUNCTION()
 	void OnToggleUI();
