@@ -8,6 +8,7 @@
 #include "Engine/Engine.h"
 #include "MovingOutCharacter.h"
 #include "Net/UnrealNetwork.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 ATruckTriggerBox::ATruckTriggerBox()
@@ -37,6 +38,8 @@ void ATruckTriggerBox::BeginPlay()
 		auto owner = GetWorld()->GetFirstPlayerController();
 		SetOwner(owner);
 	}
+
+	player = Cast<AMovingOutCharacter>(UGameplayStatics::GetActorOfClass(this, AMovingOutCharacter::StaticClass()));
 }
 
 // Called every frame
@@ -49,6 +52,8 @@ void ATruckTriggerBox::Tick(float DeltaTime)
 	{	
 		//엔딩위젯 걸린 맵으로 이동
 		//GetWorld()->ServerTravel("/Game/Map/MovingTest?Listen", true);
+		player->finalScore = count;
+		player->bFinalGame = true;
 		GetWorld()->ServerTravel("/Game/Map/EndingMap?Listen", true);
 	}
 }

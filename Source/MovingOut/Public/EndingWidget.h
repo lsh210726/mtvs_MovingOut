@@ -15,6 +15,9 @@ class MOVINGOUT_API UEndingWidget : public UUserWidget
 	GENERATED_BODY()
 	
 
+	UPROPERTY(VisibleAnywhere, meta = (BindWidget), Category = MySettings)
+	class UTextBlock* Count_Text;
+
 	//유효한 가구 넣은 횟수
 	UPROPERTY(EditAnywhere)
 	int32 count;

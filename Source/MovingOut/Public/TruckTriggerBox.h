@@ -29,6 +29,9 @@ public:
 	UPROPERTY(VisibleAnywhere, Category = "Truck")
 	class UStaticMeshComponent* BodyMesh;
 
+	UPROPERTY(EditAnywhere)
+	class AMovingOutCharacter* player;
+
 	//유효한 가구 넣은 횟수
 	UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite)
 	int32 count;
