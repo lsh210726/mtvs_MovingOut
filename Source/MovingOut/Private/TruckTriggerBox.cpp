@@ -8,6 +8,7 @@
 #include "Engine/Engine.h"
 #include "MovingOutCharacter.h"
 #include "Net/UnrealNetwork.h"
+#include "MoivingOutGameInstance.h"
 
 // Sets default values
 ATruckTriggerBox::ATruckTriggerBox()
@@ -31,6 +32,7 @@ void ATruckTriggerBox::BeginPlay()
 	Super::BeginPlay();
 
 	boxComp->OnComponentBeginOverlap.AddDynamic(this, &ATruckTriggerBox::OnComponentBeginOverlap);
+	boxComp->OnComponentEndOverlap.AddDynamic(this, &ATruckTriggerBox::OnComponentEndOverlap);
 
 	if (HasAuthority())
 	{
@@ -60,11 +62,23 @@ void ATruckTriggerBox::ServerOnRep_CountUpdated()
 	//prop이 가지고있는 bValidProp 이 true이면
 	if (count < 15) {
 	//	//유효횟수 추가
+		UMoivingOutGameInstance* gi = GetWorld()->GetGameInstance<UMoivingOutGameInstance>();
 		count++;
+		gi->finalcount = count;
 	//GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Yellow, FString::Printf(TEXT("ValidProp : %d"), count));
 	}
 	//GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Red, FString::Printf(TEXT("It's Prop")));
 	//MultiOnRep_CountUpdated();
+}
+
+void ATruckTriggerBox::ServerOnRep_CountMinus()
+{
+	if (count > 0)
+	{
+		UMoivingOutGameInstance* gi = GetWorld()->GetGameInstance<UMoivingOutGameInstance>();
+		count--;
+		gi->finalcount = count;
+	}
 }
 
 void ATruckTriggerBox::MultiOnRep_CountUpdated_Implementation()
@@ -79,12 +93,24 @@ void ATruckTriggerBox::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedCo
 	AProduct* prop = Cast<AProduct>(OtherActor);
 
 	// prop이라면
-	if (prop && prop->bValidProp)
+	if (prop && prop->bValidProp && bCountCheck == true)
 	{
-		
+		bCountCheck = false;
 		ServerOnRep_CountUpdated();
 	}
 
+}
+
+void ATruckTriggerBox::OnComponentEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{
+	AProduct* prop = Cast<AProduct>(OtherActor);
+	if (prop && prop->bValidProp)
+	{
+		bCountCheck = true;
+
+		//GEngine->AddOnScreenDebugMessage(-1, 1.0, FColor::Yellow, FString::Printf(TEXT("Velo %f"), v.Size()));
+		ServerOnRep_CountMinus();
+	}
 }
 
 void ATruckTriggerBox::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
