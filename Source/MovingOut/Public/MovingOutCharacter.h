@@ -99,6 +99,12 @@ public:
 	void ServerCountPlayer();
 
 	class AMovingOutGameModeBase* gm;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="MySettings")
+	int32 finalScore = 0;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category = "MySettings")
+	bool bFinalGame = false;
 
 
    //이승형 코드
