@@ -31,6 +31,11 @@ AProduct::AProduct()
 
 	BodyMesh->SetNotifyRigidBodyCollision(true);
 	BodyMesh->OnComponentHit.AddDynamic(this, &AProduct::OnHit);
+
+	overlapMat = CreateDefaultSubobject<UMaterial>(TEXT("OverlapMesh"));
+	endoverlapMat = CreateDefaultSubobject<UMaterial>(TEXT("EndOverlapMesh"));
+
+	
 }
 
 // Called when the game starts or when spawned

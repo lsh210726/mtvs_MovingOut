@@ -29,6 +29,12 @@ public:
 	UPROPERTY(VisibleAnywhere, Category = "Prop")
 	class UStaticMeshComponent* BodyMesh;
 
+	UPROPERTY(EditAnywhere, Category="Prop")
+	class UMaterial* overlapMat;
+
+	UPROPERTY(EditAnywhere, Category="Prop")
+	class UMaterial* endoverlapMat;
+
 	//위젯컴포턴트 선언
 	UPROPERTY(VisibleAnywhere,Category="prop")
 	class UWidgetComponent* WidGetComp;

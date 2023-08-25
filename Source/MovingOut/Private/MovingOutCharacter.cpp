@@ -149,6 +149,7 @@ void AMovingOutCharacter::OnToggleUI()
         if (prop != nullptr)
         {//캐스트가 true면
             prop->WidGetComp->SetVisibility(true);
+            prop->BodyMesh->SetRenderCustomDepth(true);
         }
     }
     /*for (TActorIterator<AProduct> It(GetWorld()); It; ++It)
@@ -167,12 +168,13 @@ void AMovingOutCharacter::OffToggleUI()
     for (AActor* actor : arrOutActors)
     {
         AProduct* prop = Cast<AProduct>(actor);
-        if (prop != nullptr)//만약 캐스트가 true면
+        if (prop != nullptr && prop->bValidProp == false)//만약 캐스트가 true면
         {
             prop->WidGetComp->SetVisibility(false);
+            prop->BodyMesh->SetRenderCustomDepth(false);
         }
     }
-
+    
     //    else
     //    {
     //        // UI 위젯을 뷰포트에서 제거합니다.
