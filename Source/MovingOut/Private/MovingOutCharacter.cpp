@@ -146,7 +146,7 @@ void AMovingOutCharacter::OnToggleUI()
     {
         AProduct* prop = Cast<AProduct>(actor); //AProduct 캐스트
 
-        if (prop != nullptr)
+        if (prop != nullptr && prop->bValidProp == false)
         {//캐스트가 true면
             prop->WidGetComp->SetVisibility(true);
             prop->BodyMesh->SetRenderCustomDepth(true);

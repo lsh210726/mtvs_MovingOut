@@ -93,11 +93,12 @@ void ATruckTriggerBox::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedCo
    AProduct* prop = Cast<AProduct>(OtherActor);
    //GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Yellow, FString::Printf(TEXT("OnComponentBeginOverlap")));
    // propÀÌ¶ó¸é
-   if (prop && prop->bValidProp)
+   if (prop && prop->bValidProp == false)
    //if (prop && prop->bValidProp && bCountCheck == true)
    {
       //GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Yellow, FString::Printf(TEXT("bValidProp")));
       prop->BodyMesh->SetMaterial(0, prop->overlapMat);
+      prop->bValidProp = true;
       bCountCheck = false;
       ServerOnRep_CountUpdated();
    }
@@ -107,9 +108,10 @@ void ATruckTriggerBox::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedCo
 void ATruckTriggerBox::OnComponentEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
    AProduct* prop = Cast<AProduct>(OtherActor);
-   if (prop && prop->bValidProp)
+   if (prop)
    {
       prop->BodyMesh->SetMaterial(0, prop->endoverlapMat);
+      prop->bValidProp = false;
       bCountCheck = true;
       //GEngine->AddOnScreenDebugMessage(-1, 1.0, FColor::Yellow, FString::Printf(TEXT("Velo %f"), v.Size()));
       ServerOnRep_CountMinus();
