@@ -59,7 +59,7 @@ void AProduct::Tick(float DeltaTime)
 
 		if (v.Size() > 30.0f)
 		{
-			GEngine->AddOnScreenDebugMessage(-1, 1.0, FColor::Yellow, FString::Printf(TEXT("Velo %f"), v.Size()));
+			//GEngine->AddOnScreenDebugMessage(-1, 1.0, FColor::Yellow, FString::Printf(TEXT("Velo %f"), v.Size()));
 			if (bDoOnce && AttenuationSettings != nullptr)
 			{
 				bDoOnce = false;
@@ -88,7 +88,7 @@ void AProduct::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPri
 		{
 			if (bDoOnce && AttenuationSettings != nullptr)
 			{
-				GEngine->AddOnScreenDebugMessage(-1, 1.0, FColor::Yellow, FString::Printf(TEXT("Velo %f"), BodyMesh->GetComponentVelocity().Length()));
+				//GEngine->AddOnScreenDebugMessage(-1, 1.0, FColor::Yellow, FString::Printf(TEXT("Velo %f"), BodyMesh->GetComponentVelocity().Length()));
 				bDoOnce = false;
 				UGameplayStatics::PlaySoundAtLocation(GetWorld(), productSound, BodyMesh->GetComponentLocation(), 1.0f, 1.0f, 0.0f, AttenuationSettings);
 				GetWorld()->GetTimerManager().SetTimer(GravityTimerHandle, FTimerDelegate::CreateLambda([&]()

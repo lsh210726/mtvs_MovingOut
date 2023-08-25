@@ -9,42 +9,47 @@
 UCLASS()
 class MOVINGOUT_API ATruckTriggerBox : public AActor
 {
-	GENERATED_BODY()
-	
-public:	
-	// Sets default values for this actor's properties
-	ATruckTriggerBox();
+   GENERATED_BODY()
+   
+public:   
+   // Sets default values for this actor's properties
+   ATruckTriggerBox();
 
 protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
+   // Called when the game starts or when spawned
+   virtual void BeginPlay() override;
 
-public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
+public:   
+   // Called every frame
+   virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY(VisibleAnywhere, Category="Truck")
-	class UBoxComponent* boxComp;
+   UPROPERTY(VisibleAnywhere, Category="Truck")
+   class UBoxComponent* boxComp;
 
-	UPROPERTY(VisibleAnywhere, Category = "Truck")
-	class UStaticMeshComponent* BodyMesh;
+   UPROPERTY(VisibleAnywhere, Category = "Truck")
+   class UStaticMeshComponent* BodyMesh;
 
-	UPROPERTY(EditAnywhere)
-	class AMovingOutCharacter* player;
+   //유효한 가구 넣은 횟수
+   UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite)
+   int32 count;
 
-	//유효한 가구 넣은 횟수
-	UPROPERTY(Replicated, EditAnywhere, BlueprintReadWrite)
-	int32 count;
+   UPROPERTY(EditAnywhere)
+   bool bCountCheck = true;
 
-	//UFUNCTION(Server, Reliable)
-	void ServerOnRep_CountUpdated();
+   //UFUNCTION(Server, Reliable)
+   void ServerOnRep_CountUpdated();
 
-	UFUNCTION(NetMulticast, Reliable)
-	void MultiOnRep_CountUpdated();
+   void ServerOnRep_CountMinus();
 
-	UFUNCTION()
-	void OnComponentBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+   UFUNCTION(NetMulticast, Reliable)
+   void MultiOnRep_CountUpdated();
 
-	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+   UFUNCTION()
+   void OnComponentBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
+   UFUNCTION()
+   void OnComponentEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+
+   virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 };

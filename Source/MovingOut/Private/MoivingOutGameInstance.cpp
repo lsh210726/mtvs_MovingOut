@@ -103,8 +103,8 @@ void UMoivingOutGameInstance::OnJoinMySession(FName sessionName, EOnJoinSessionC
 		{
 			//join된 세션 호스트의 serverTravel 된 맵주소를 받아온다.
 			
-			//FString url = "192.168.0.58";
-			FString url = "192.168.0.219";
+			FString url = "192.168.0.58";
+			//FString url = "192.168.0.219";
 			//FString url = "192.168.0.58:7777";
 			//FString url = "125.132.216.155:7777";
 			//FString url = "192.168.0.217:7777";
