@@ -16,6 +16,7 @@
 #include <UMG/Public/Components/WidgetComponent.h>
 #include <EngineUtils.h>
 #include "MovingOutGameModeBase.h"
+#include <Components/BoxComponent.h>
 
 // Sets default values
 AMovingOutCharacter::AMovingOutCharacter()
@@ -29,6 +30,9 @@ AMovingOutCharacter::AMovingOutCharacter()
     //ViewCamera->SetupAttachment(CameraBoom);
     //playerComp = CreateDefaultSubobject<UPlayerBaseComponent>(TEXT("Base Component"));
     playerMove = CreateDefaultSubobject<UPlayer_Move>(TEXT("PlayerMove"));
+
+	boxComp = CreateDefaultSubobject<UBoxComponent>(TEXT("boxComp"));
+    boxComp->SetupAttachment(RootComponent);
 }
 
 // Called when the game starts or when spawned
@@ -44,6 +48,9 @@ void AMovingOutCharacter::BeginPlay()
             Subsystem->AddMappingContext(MovingOutContext, 0);
         }
     }
+    boxComp->OnComponentBeginOverlap.AddDynamic(this, &AMovingOutCharacter::OnComponentBeginOverlap);
+    boxComp->OnComponentEndOverlap.AddDynamic(this, &AMovingOutCharacter::OnComponentEndOverlap);
+
 
     //prop->SetVisibility(ESlateVisibility::Hidden);
 
@@ -60,6 +67,7 @@ void AMovingOutCharacter::BeginPlay()
     {
 
     }*/
+    
 }
 
 // Called every frame
@@ -68,6 +76,8 @@ void AMovingOutCharacter::Tick(float DeltaTime)
     Super::Tick(DeltaTime);
 
     GrabObjectContinue();
+
+   
 }
 
 // Called to bind functionality to input
@@ -188,9 +198,32 @@ void AMovingOutCharacter::ServerCountPlayer_Implementation()
 	gm = Cast<AMovingOutGameModeBase>(GetWorld()->GetAuthGameMode());
 	if (gm)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 0.1f, FColor::Yellow, TEXT("gggg"));
+		//GEngine->AddOnScreenDebugMessage(-1, 0.1f, FColor::Yellow, TEXT("gggg"));
 		gm->CountPlayer();
 	}
+}
+
+void AMovingOutCharacter::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+    AProduct* prop = Cast<AProduct>(OtherActor);
+   // prop이라면
+   
+   if (prop && bGrab == false)
+   //if (prop && prop->bValidProp && bCountCheck == true)
+   {
+      prop->BodyMesh->SetRenderCustomDepth(true);
+   }
+}
+
+void AMovingOutCharacter::OnComponentEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{
+   AProduct* prop = Cast<AProduct>(OtherActor);
+   // prop이라면
+   if (prop)
+   //if (prop && prop->bValidProp && bCountCheck == true)
+   {
+       prop->BodyMesh->SetRenderCustomDepth(false);
+   }
 }
 
 void AMovingOutCharacter::GrabObjectStart_Implementation()
