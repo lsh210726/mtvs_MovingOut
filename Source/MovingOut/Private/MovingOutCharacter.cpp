@@ -120,6 +120,7 @@ void AMovingOutCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInput
     PlayerInputComponent->BindAction(TEXT("GrabObject"), IE_Pressed, this, &AMovingOutCharacter::GrabObjectStart);
     PlayerInputComponent->BindAction(TEXT("GrabObject"), IE_Released, this, &AMovingOutCharacter::GrabObjectEnd);
     PlayerInputComponent->BindAction(TEXT("ShootObject"), IE_Pressed, this, &AMovingOutCharacter::ShootObject);
+    PlayerInputComponent->BindAction(TEXT("GoToEndingMap"),IE_Pressed , this, &AMovingOutCharacter::GotoEndingMap);
 }
 
 
@@ -224,6 +225,11 @@ void AMovingOutCharacter::OnComponentEndOverlap(UPrimitiveComponent* OverlappedC
    {
        prop->BodyMesh->SetRenderCustomDepth(false);
    }
+}
+
+void AMovingOutCharacter::GotoEndingMap()
+{   
+    GetWorld()->ServerTravel("/Game/Map/EndingMap?Listen", true);
 }
 
 void AMovingOutCharacter::GrabObjectStart_Implementation()
