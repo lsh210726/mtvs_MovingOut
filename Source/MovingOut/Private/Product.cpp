@@ -59,7 +59,7 @@ void AProduct::Tick(float DeltaTime)
 	//무거운 물체 끄는 소리
 	FVector nowVelocity = BodyMesh->GetComponentVelocity();
 	FVector v = nowVelocity - prevVelocity;
-	if (BodyMesh->GetMass() > 51)
+	if (BodyMesh->GetMass() > 151)
 	{
 
 		if (v.Size() > 30.0f)
@@ -86,7 +86,7 @@ void AProduct::Tick(float DeltaTime)
 void AProduct::OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
 	// Do something with the hit result
-	if (BodyMesh->GetMass() < 51)
+	if (BodyMesh->GetMass() < 151)
 	{
 		//GEngine->AddOnScreenDebugMessage(-1, 1.0, FColor::Yellow, FString::Printf(TEXT("Velo %f"), BodyMesh->GetComponentVelocity().Length()));
 		if (BodyMesh->GetComponentVelocity().Length() > 100)

@@ -40,7 +40,7 @@ public:
 	class UWidgetComponent* WidGetComp;
 
 	//트럭에 넣는 유효한 박스인지 확인하기
-	UPROPERTY(EditAnywhere, Category="Prop")
+	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category="Prop")
 	bool bValidProp = false;
 
 	//true1 false2 로 진행

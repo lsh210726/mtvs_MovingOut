@@ -47,7 +47,7 @@ void ATruckTriggerBox::Tick(float DeltaTime)
    Super::Tick(DeltaTime);
    //브랜치 추가
 
-   if (count == 15)
+   if (count == 13)
    {   
       //엔딩위젯 걸린 맵으로 이동
       //GetWorld()->ServerTravel("/Game/Map/MovingTest?Listen", true);
@@ -58,14 +58,12 @@ void ATruckTriggerBox::Tick(float DeltaTime)
 
 void ATruckTriggerBox::ServerOnRep_CountUpdated()
 {
-    GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Yellow, FString::Printf(TEXT("ServerOnRep_CountUpdated")));
    //prop이 가지고있는 bValidProp 이 true이면
    if (count < 15) {
    //   //유효횟수 추가
       UMoivingOutGameInstance* gi = GetWorld()->GetGameInstance<UMoivingOutGameInstance>();
       count++;
       gi->finalcount = count;
-      GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Yellow, FString::Printf(TEXT("count : %d"), count));
    }
    //GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Red, FString::Printf(TEXT("It's Prop")));
    //MultiOnRep_CountUpdated();
@@ -93,11 +91,12 @@ void ATruckTriggerBox::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedCo
    AProduct* prop = Cast<AProduct>(OtherActor);
    //GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Yellow, FString::Printf(TEXT("OnComponentBeginOverlap")));
    // prop이라면
-   if (prop && prop->bValidProp)
+   if (prop && prop->bValidProp == false)
    //if (prop && prop->bValidProp && bCountCheck == true)
    {
       //GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Yellow, FString::Printf(TEXT("bValidProp")));
       prop->BodyMesh->SetMaterial(0, prop->overlapMat);
+      prop->bValidProp = true;
       bCountCheck = false;
       ServerOnRep_CountUpdated();
    }
@@ -107,9 +106,10 @@ void ATruckTriggerBox::OnComponentBeginOverlap(UPrimitiveComponent* OverlappedCo
 void ATruckTriggerBox::OnComponentEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
    AProduct* prop = Cast<AProduct>(OtherActor);
-   if (prop && prop->bValidProp)
+   if (prop)
    {
       prop->BodyMesh->SetMaterial(0, prop->endoverlapMat);
+      prop->bValidProp = false;
       bCountCheck = true;
       //GEngine->AddOnScreenDebugMessage(-1, 1.0, FColor::Yellow, FString::Printf(TEXT("Velo %f"), v.Size()));
       ServerOnRep_CountMinus();
