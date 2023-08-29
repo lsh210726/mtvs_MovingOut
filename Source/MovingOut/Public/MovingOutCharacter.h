@@ -106,6 +106,24 @@ public:
 	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category = "MySettings")
 	bool bFinalGame = false;
 
+	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category="Truck")
+    class UBoxComponent* boxComp;
+
+   UPROPERTY(EditAnywhere,BlueprintReadWrite, Category = "MySettings")
+   bool bGrab = false;
+
+   UFUNCTION()
+   void OnComponentBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
+   UFUNCTION()
+   void OnComponentEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+
+   UFUNCTION()
+   void GotoEndingMap();
+
+   //class AProduct* prop;
+
+
 
    //ÀÌ½ÂÇü ÄÚµå
 public:

@@ -47,7 +47,7 @@ void ATruckTriggerBox::Tick(float DeltaTime)
    Super::Tick(DeltaTime);
    //브랜치 추가
 
-   if (count == 15)
+   if (count == 13)
    {   
       //엔딩위젯 걸린 맵으로 이동
       //GetWorld()->ServerTravel("/Game/Map/MovingTest?Listen", true);
@@ -58,14 +58,12 @@ void ATruckTriggerBox::Tick(float DeltaTime)
 
 void ATruckTriggerBox::ServerOnRep_CountUpdated()
 {
-    GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Yellow, FString::Printf(TEXT("ServerOnRep_CountUpdated")));
    //prop이 가지고있는 bValidProp 이 true이면
    if (count < 15) {
    //   //유효횟수 추가
       UMoivingOutGameInstance* gi = GetWorld()->GetGameInstance<UMoivingOutGameInstance>();
       count++;
       gi->finalcount = count;
-      GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Yellow, FString::Printf(TEXT("count : %d"), count));
    }
    //GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Red, FString::Printf(TEXT("It's Prop")));
    //MultiOnRep_CountUpdated();

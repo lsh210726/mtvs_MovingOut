@@ -1,1 +1,1 @@
-"D:\UE_5.2\Engine\Binaries\Win64\UnrealEditor.exe" "E:\Unreal\mtvs_MovingOut\MovingOut.uproject" -game -ResX=640 -ResY=480 -WinX=150 -WinY=250 -log
+"D:\UE_5.2\Engine\Binaries\Win64\UnrealEditor.exe" "E:\Unreal\Beta\MovingOutBeta\MovingOut.uproject" -game -ResX=640 -ResY=480 -WinX=150 -WinY=250 -log
