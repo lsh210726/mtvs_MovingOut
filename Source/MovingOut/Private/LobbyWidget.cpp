@@ -34,5 +34,5 @@ void ULobbyWidget::OnClickInGame()
 {
 	//player->ServerCountPlayer();
 	//GetWorld()->ServerTravel("/Game/Map/MovingTest?Listen", true);
-	GetWorld()->ServerTravel("/Game/Map/NSH_Moving?Listen", true);
+	GetWorld()->ServerTravel("/Game/Map/PARK_moving2?Listen", true);
 }

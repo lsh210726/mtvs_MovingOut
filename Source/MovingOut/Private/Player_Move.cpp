@@ -68,6 +68,7 @@ void UPlayer_Move::Move(const FInputActionValue& value)
 
 	/*FVector dir = player->GetActorLocation();
 	cameraActor->SetActorLocation(FVector(dir.X+directionX, dir.Y+directionY,  670));*/
+	f = Rotation.Yaw;
 }
 
 

@@ -39,7 +39,6 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 
-
 private:
 	
 	//Move로 이동
@@ -79,7 +78,7 @@ public:
 
 	void Move(const FInputActionValue& value);
 
-//1,2용인지 숫자 UI표시 
+	//1,2용인지 숫자 UI표시 
 public:
 	UFUNCTION()
 	void OnToggleUI();
@@ -100,6 +99,30 @@ public:
 	void ServerCountPlayer();
 
 	class AMovingOutGameModeBase* gm;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="MySettings")
+	int32 finalScore = 0;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category = "MySettings")
+	bool bFinalGame = false;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite, Category="Truck")
+    class UBoxComponent* boxComp;
+
+   UPROPERTY(EditAnywhere,BlueprintReadWrite, Category = "MySettings")
+   bool bGrab = false;
+
+   UFUNCTION()
+   void OnComponentBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
+   UFUNCTION()
+   void OnComponentEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+
+   UFUNCTION()
+   void GotoEndingMap();
+
+   //class AProduct* prop;
+
 
 
    //이승형 코드

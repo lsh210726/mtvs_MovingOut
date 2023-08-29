@@ -44,5 +44,11 @@ public:
 	void OnJoinMySession(FName sessionName, EOnJoinSessionCompleteResult::Type result);
 
 	bool isEnterMainMap=false;
+
+	  //게임종료를 하기위한 변수
+   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Final")
+   int32 finalcount = 0;
+   UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="Final")
+   float finalTime = 0;
 	
 };

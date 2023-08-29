@@ -64,6 +64,7 @@ float directionX = 600;
 UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="SettingCamera")
 float directionY = 1300;
 
+float f = 0;
 
 
 };
